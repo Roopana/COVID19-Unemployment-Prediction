@@ -2,7 +2,7 @@
 
 ## Objectives
 
-- 1. To analyze, predict and visualize the distribution and number of cases of COVID19 across U.S states using Spark.
+- 1. To analyze, predict and visualize the distribution and number of cases of COVID19 across U.S states using __Spark__.
 - 2. To predict the trend in unemployment claims based on the COVID19 cases being reported. This is achieved using the timeseries analysis of U.S Unemployment insurance claims since 1987 till April 18th, 2020 and correlating the trend with COVID19 cases in U.S.
 
 ## Datasets
