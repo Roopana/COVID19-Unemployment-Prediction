@@ -61,6 +61,7 @@ By adding COVID data as an additional regressor, the resultant UI claims data is
 - Multi variate regression is not supported directly in Prophet library. To overcome this, I initially built an independent COVID time series model and then considered its outcome as an input to the time series model of unemployment claims establishing causal dependency between the prediction outcomes of the COVID model and time series observations of UI claims.  
 - Time series models are ideal in a scenario to capture seasonality of data and forecast future observations. However, the COVID data available is too less to make accurate predictions, hence the large error window in results. Small dataset is also an inhibition to build a linear regression model of COVID cases and UI claims which could have enabled a better idea of trends between two variables. 
 
+ <!--- 
 ## Description of Datasets
 ### COVID cases:
 - Duration of the data: January 2020 to May 2020
@@ -70,7 +71,6 @@ By adding COVID data as an additional regressor, the resultant UI claims data is
 	- State: State/province of the US 
 	- Cases: Number of Corona virus cases recorded on the given day and given state
 	- Deaths: Number of deaths occurred due to Corona virus cases on the given day and state
-
 ### Unemployment Insurance Claims data:
 - Duration of the data: January 1976 to March 2020
 - Source: US department of Labor
@@ -82,7 +82,6 @@ By adding COVID data as an additional regressor, the resultant UI claims data is
 	- Reflected Week Ended: The week from which the continued claims are carried forward (i.e. the previous week)
 	- Covered Employment: Number of employers that are insured
 	- Insured Unemployment rate: Rate of insured unemployed population
-
 ### Population Data:
 - Duration of the data: January 1976 to March 2020
 - Source: US Bureau of Labor Statistics
@@ -90,3 +89,4 @@ By adding COVID data as an additional regressor, the resultant UI claims data is
 	- Year, Month: Year and month corresponding to the entry
 	- State: State corresponding to the entry
 	- Population: Population in the given state in the given month, year
+ ---!>
