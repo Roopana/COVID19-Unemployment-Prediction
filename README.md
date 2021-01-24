@@ -6,27 +6,25 @@
 - 2. To predict the trend in unemployment claims based on the COVID19 cases being reported. This is achieved using the timeseries analysis of U.S Unemployment insurance claims since 1987 till April 18th, 2020 and correlating the trend with COVID19 cases in U.S.
 
 ## Datasets
-1. [COVID19 dataset](https://github.com/owid/covid-19-data/tree/master/public/data)] published by _Our World_ in Data for daily cases and deaths in U.S states (Jan 01, 2020 to May 6, 2020, updated daily).
-2. Weekly unemployment insurance claims from Jan 1 1987 to Apr 18 2020, across all states in U.S, published by the U.S Department of Labor. This data is not seasonally adjusted and hence would be ideal to explore the data patterns.
+1. [COVID19 dataset](https://github.com/owid/covid-19-data/tree/master/public/data) published by _Our World_ in Data for daily cases and deaths in U.S states (Jan 01, 2020 to May 6, 2020, updated daily).
+2. [Weekly unemployment insurance claims](https://oui.doleta.gov/unemploy/claims.asp) from Jan 1 1987 to Apr 18 2020, across all states in U.S, published by the U.S Department of Labor. This data is not seasonally adjusted and hence would be ideal to explore the data patterns.
 3. Population data of all states in U.S (non-institutional civilian population) since 1967, as published by the U.S Bureau of Labor Statistics. This data is used to calculate COVD19 cases and UI claims as percentage of a state’s population and do a comparative analysis on the severity of situation across the states. The data set also contains information on employment, however only population data is used. 
 
-Below is the list of key fields used from the data sets. Please refer Appendix A for the detailed description of fields.
-List of fields
-       
-Data Preprocessing
-1.	The population data is only available till March 2020, values for the months of April and May are imputed by assuming there is no change in population since March 2020. 
-2.	The three datasets used in the analysis are of different periodicity (COVID19 – daily, UI Claims – weekly, Population – monthly). To join the datasets, I computed week, month and year columns as required and aggregated the values within the considered period before executing the join operation.
-3.	Column names had spaces in the input data. This is not supported in DELTA tables. Created my own schema while loading datasets and renamed the columns.
-4.	Raw data of UI claims has commas in unemployment numbers when read from CSV file. I used a user defined function to clean the data and type casted to long datatype. 
-Data models
-	Both COVID and UI claims are initially joined with population data to obtain attributes as percentage of population. This enables a fair comparison of the cases and UI claims across states. The join and the final output fields that are considered for the analysis are displayed in the chart below.
+## Data Preprocessing
+- 1. The population data is only available till March 2020, values for the months of April and May are imputed by assuming there is no change in population since March 2020. 
+- 2. The three datasets used in the analysis are of different periodicity (COVID19 – daily, UI Claims – weekly, Population – monthly). To join the datasets, I computed week, month and year columns as required and aggregated the values within the considered period before executing the join operation.
+- 3. Column names had spaces in the input data. This is not supported in DELTA tables. Created my own schema while loading datasets and renamed the columns.
+- 4. Raw data of UI claims has commas in unemployment numbers when read from CSV file. I used a user defined function to clean the data and type casted to long datatype. 
 
- 
+## Data models
+Both COVID and UI claims are initially joined with population data to obtain attributes as percentage of population. This enables a fair comparison of the cases and UI claims across states. The join and the final output fields that are considered for the analysis are displayed in the chart below.
 
-The analysis consists of three predictive models built based on the datasets considered:
-1.	A time series model to predict COVID cases across all states, based on the affected population since Jan 2020. It is built using the open source library – prophet, by facebook.
-2.	A time series model to predict weekly unemployment insurance claims independent of the pandemic, based on historical data, since 1987. 
-3.	A time series model to predict weekly unemployment insurance claims by considering the COVID cases as an additional regressor in the model built in #2.
+![](datamodels.png)
+
+The analysis consists of three predictive models:
+- 1. A time series model to predict COVID cases across all states, based on the affected population since Jan 2020. It is built using the open source library – prophet, by facebook.
+- 2. A time series model to predict weekly unemployment insurance claims independent of the pandemic, based on historical data, since 1987. 
+- 3. A time series model to predict weekly unemployment insurance claims by considering the COVID cases as an additional regressor in the model built in #2.
 Results and Inference
 1.	Daily COVID cases aggregated over all states in US
 
@@ -88,54 +86,41 @@ Learnings
 4.	User defined functions to perform data preprocessing operations
 5.	Databricks as an interactive interface for quick plotting and import of other libraries. 
 
-Challenges
-	Databricks notebook allows only first 1000 rows and 20 series to be plotted in inbuilt graphs. This could not be used to plot the time series data of all 50 US states since 1987. Hence, I used matplotlib for visualizations in the notebook. 
-	Multi variate regression is not supported directly in Prophet library. To overcome this, I initially built an independent COVID time series model and then considered its outcome as an input to the time series model of unemployment claims establishing causal dependency between the prediction outcomes of the COVID model and time series observations of UI claims.  
+## Challenges
+
+Multi variate regression is not supported directly in Prophet library. To overcome this, I initially built an independent COVID time series model and then considered its outcome as an input to the time series model of unemployment claims establishing causal dependency between the prediction outcomes of the COVID model and time series observations of UI claims.  
 	Time series models are ideal in a scenario to capture seasonality of data and forecast future observations. However, the COVID data available is too less to make accurate predictions, hence the large error window in results. Small dataset is also an inhibition to build a linear regression model of COVID cases and UI claims which could have enabled a better idea of trends between two variables. 
 Future Work
 	Given COVID cases in US is a small dataset to build an accurate time series model, data from countries that have already controlled the pandemic (Ex. China) can be used to train the model and then can be used to forecast the situation in U.S. 
 	Employment is only one of the several indicators of economic growth. Other datasets like industry production, fuel prices, transportation can be added to the existing model, to perform an extensive economic impact analysis due to the COVID19 pandemic. 
 	The data considered in the current analysis is only for US states, it can be extended to global countries. However, I found it challenging to gather data for global economic indicators.
-Appendix A
 
-Description of Datasets
-COVID cases:
-•	Duration of the data: January 2020 to May 2020
-•	Source: Public COVID19 dataset published by Our World in Data
-•	Fields:
-o	Date: Date corresponding to the entry
-o	State: State/province of the US 
-o	Cases: Number of Corona virus cases recorded on the given day and given state
-o	Deaths: Number of deaths occurred due to Corona virus cases on the given day and state
+## Description of Datasets
+### COVID cases:
+- Duration of the data: January 2020 to May 2020
+- Source: Public COVID19 dataset published by Our World in Data
+- Fields:
+	- Date: Date corresponding to the entry
+	- State: State/province of the US 
+	- Cases: Number of Corona virus cases recorded on the given day and given state
+	- Deaths: Number of deaths occurred due to Corona virus cases on the given day and state
 
-Unemployment Insurance Claims data:
-•	Duration of the data: January 1976 to March 2020
-•	Source: US department of Labor
-•	Fields:
-o	State: State corresponding to the entry
-o	Filed Week ended: Week when the claim is filed
-o	Initial Claims: The number of new claims in the current week
-o	Continued Claims: Number of claims that are being carried forward from previous week
-o	Reflected Week Ended: The week from which the continued claims are carried forward (i.e. the previous week)
-o	Covered Employment: Number of employers that are insured
-o	Insured Unemployment rate: Rate of insured unemployed population
+### Unemployment Insurance Claims data:
+- Duration of the data: January 1976 to March 2020
+- Source: US department of Labor
+- Fields:
+	- State: State corresponding to the entry
+	- Filed Week ended: Week when the claim is filed
+	- Initial Claims: The number of new claims in the current week
+	- Continued Claims: Number of claims that are being carried forward from previous week
+	- Reflected Week Ended: The week from which the continued claims are carried forward (i.e. the previous week)
+	- Covered Employment: Number of employers that are insured
+	- Insured Unemployment rate: Rate of insured unemployed population
 
-Population Data:
-•	Duration of the data: January 1976 to March 2020
-•	Source: US Bureau of Labor Statistics
-•	Fields:
-o	Year, Month: Year and month corresponding to the entry
-o	State: State corresponding to the entry
-o	Population: Population in the given state in the given month, year
-
-
-Link to my data bricks notebook with the analysis: https://databricks-prod-cloudfront.cloud.databricks.com/public/4027ec902e239c93eaaa8714f173bcfc/8841377592325918/1921688529836707/8759328480939405/latest.html
-
- 
-References
-
-Public COVID19 dataset published by Our World in Data, https://github.com/owid/covid-19-data/tree/master/public/data
-Weekly unemployment claims, US department of Labor, https://oui.doleta.gov/unemploy/claims.asp
-State wise population, US Bureau of Labor Statistics, https://www.bls.gov/sae/additional-resources/list-of-published-state-and-metropolitan-area-series/home.htm
-Prophet for multivariate analysis, https://github.com/facebook/prophet/issues/665
-Unemployment Insurance analysis by the US department of Labor, https://www.dol.gov/ui/data.pdf
+### Population Data:
+- Duration of the data: January 1976 to March 2020
+- Source: US Bureau of Labor Statistics
+- Fields:
+	- Year, Month: Year and month corresponding to the entry
+	- State: State corresponding to the entry
+	- Population: Population in the given state in the given month, year
