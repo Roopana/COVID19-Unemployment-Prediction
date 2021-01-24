@@ -75,26 +75,24 @@ Least Insured Unemployment Rate	 Florida	8.7
  
 
 	By adding COVID data as an additional regressor, the resultant UI claims data is now restricted only to the data from 2020. The number of observations (made weekly) is only 16 (by default, Prophet specifies 25 potential changepoints which are uniformly placed in the first 80% of the time series). This has resulted in an overfitted model and does not give reliable predictions. As the trend shown above, the number of claims continuously increase based on the COVID19 cases considered so far. The model without incorporating COVID cases estimated UI claims to be 15.8M during 2020, while the multivariate time series model estimates it to be 20M in June 2020. The actual UI claims till April 18, 2020, are 15M. If the COVID situation persists during coming months, the multivariate model tends to give more accurate results because it captures the impact due to the pandemic whereas it is not captured in the independent UI claims model.
-Conclusion
-	Time series model for the COVID cases forecasted over 1.5 million cases at the end of May 2020 based on current trend. 
+
+## Conclusion
+Time series model for the COVID cases forecasted over 1.5 million cases at the end of May 2020 based on current trend. 
 	A multivariate timeseries model has been developed to predict unemployment insurance claims in U.S based on the historical data of UI claims and COVID impact. However, the model is overfitted due to a smaller number of observations. It gives an idea of what will be the situation, if the COVID cases continuously increase. The model needs to be further trained based on the data from recent reports which indicates that the cases have started to stabilize. Then the multivariate model can potentially be a better performer than the independent model. 
 	A comparative study on states has been made to understand the affected population due to COVID. It has been observed that not all states experience pandemic with peak severity at the same time.
 	When we compare the current unemployment situation with that of the 2008 recession, it is much worse given the UI claims are three times as seen in 2008. This calls for potentially much worse decline in GDP than what was seen in 2008. However, this needs to be backed up by the analysis of other economic indicators like trade, transportation, consumer prices, fuel prices etc.
-Learnings
-1.	Data cleaning, validation and modelling in Spark using Python
-2.	Time series Analysis using prophet library and multi variate analysis. Prophet is based on an additive model considering non-periodic changes and periodic components in a Bayesian framework with easily interpretable parameters. 	
-3.	Query optimization using partitioned DELTA tables
-4.	User defined functions to perform data preprocessing operations
-5.	Databricks as an interactive interface for quick plotting and import of other libraries. 
+
+## Learnings
+1. Data cleaning, validation and modelling in Spark using Python
+2. Time series Analysis using prophet library and multi variate analysis. Prophet is based on an additive model considering non-periodic changes and periodic components in a Bayesian framework with easily interpretable parameters. 	
+3. Query optimization using partitioned DELTA tables
+4. User defined functions to perform data preprocessing operations
+5. Databricks as an interactive interface for quick plotting and import of other libraries. 
 
 ## Challenges
 
 Multi variate regression is not supported directly in Prophet library. To overcome this, I initially built an independent COVID time series model and then considered its outcome as an input to the time series model of unemployment claims establishing causal dependency between the prediction outcomes of the COVID model and time series observations of UI claims.  
 	Time series models are ideal in a scenario to capture seasonality of data and forecast future observations. However, the COVID data available is too less to make accurate predictions, hence the large error window in results. Small dataset is also an inhibition to build a linear regression model of COVID cases and UI claims which could have enabled a better idea of trends between two variables. 
-Future Work
-	Given COVID cases in US is a small dataset to build an accurate time series model, data from countries that have already controlled the pandemic (Ex. China) can be used to train the model and then can be used to forecast the situation in U.S. 
-	Employment is only one of the several indicators of economic growth. Other datasets like industry production, fuel prices, transportation can be added to the existing model, to perform an extensive economic impact analysis due to the COVID19 pandemic. 
-	The data considered in the current analysis is only for US states, it can be extended to global countries. However, I found it challenging to gather data for global economic indicators.
 
 ## Description of Datasets
 ### COVID cases:
