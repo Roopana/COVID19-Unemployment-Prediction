@@ -16,7 +16,7 @@
 - 3. Column names had spaces in the input data. This is not supported in DELTA tables. Created my own schema while loading datasets and renamed the columns.
 - 4. Raw data of UI claims has commas in unemployment numbers when read from CSV file. I used a user defined function to clean the data and type casted to long datatype. 
 
-## Data models
+## Data Models
 Both COVID and UI claims are initially joined with population data to obtain attributes as percentage of population. This enables a fair comparison of the cases and UI claims across states. The join and the final output fields that are considered for the analysis are displayed in the chart below.
 
 ![](results/datamodels.png)
