@@ -6,7 +6,7 @@
 - 2. To predict the trend in unemployment claims based on the COVID19 cases being reported. This is achieved using the timeseries analysis of U.S Unemployment insurance claims since 1987 till April 18th, 2020 and correlating the trend with COVID19 cases in U.S.
 
 ## Datasets
-1. [COVID19 dataset (https://github.com/owid/covid-19-data/tree/master/public/data)] published by _Our World_ in Data for daily cases and deaths in U.S states (Jan 01, 2020 to May 6, 2020, updated daily).
+1. [COVID19 dataset](https://github.com/owid/covid-19-data/tree/master/public/data)] published by _Our World_ in Data for daily cases and deaths in U.S states (Jan 01, 2020 to May 6, 2020, updated daily).
 2. Weekly unemployment insurance claims from Jan 1 1987 to Apr 18 2020, across all states in U.S, published by the U.S Department of Labor. This data is not seasonally adjusted and hence would be ideal to explore the data patterns.
 3. Population data of all states in U.S (non-institutional civilian population) since 1967, as published by the U.S Bureau of Labor Statistics. This data is used to calculate COVD19 cases and UI claims as percentage of a state’s population and do a comparative analysis on the severity of situation across the states. The data set also contains information on employment, however only population data is used. 
 
