@@ -19,7 +19,7 @@
 ## Data models
 Both COVID and UI claims are initially joined with population data to obtain attributes as percentage of population. This enables a fair comparison of the cases and UI claims across states. The join and the final output fields that are considered for the analysis are displayed in the chart below.
 
-![](datamodels.png)
+![](results/datamodels.png)
 
 The analysis consists of three predictive models:
 - 1. A time series model to predict COVID cases across all states, based on the affected population since Jan 2020. It is built using the open source library – prophet, by facebook.
@@ -31,13 +31,17 @@ The analysis consists of three predictive models:
 ### COVID19 cases - future predictions
 Below trend is obtained as a result of the time series prediction of COVID cases in 2020. The dark line denotes the historical data (till May 6, 2020) and predictions afterwards. Shaded area in the plot corresponds to error in the forecasted observations. Given the data available is small, error is high in the predictions. U.S has seen an exponential increase in the number of cases; hence the predictions indicate an exponential growth in the future cases. However, the shaded region indicates a possibility of stabilization which can be attribute to the recent observations. It is not depicted in the actual trend due to the insignificant number of observations. Hence, the model needs to be continuously updated with real time data for change in trends and accurate predictions. As per the trend the number of cases will be over 1.5 million at the end of May 2020. 
 
+![](results/COVIDcases_future_predictions.png)
 
 ### Time series Predictions - UI claims
 Below is the time series prediction of UI claims till 2022. There are two points of inflection in the trend - 1987 and 2009 both corresponding to the two major economic crises in the past. The trendline for 2020 shows a slight increase in the number of UI claims which has remained constant since 2010 at 1.58 million. However, the error means that there can be an increase or decrease based on the future observations, potentially resulting in another inflection point in the UI claims trend indicating a major change. This depends on how long the pandemic lasts. Hence to get a better understanding, the model is trained using COVID cases as an input parameter and the results are described in the next graph. 
  
+![](results/timeseries_ui_claims.png)
 
 ### Multivariate Time series Model for UI claims	
 By adding COVID data as an additional regressor, the resultant UI claims data is now restricted only to the data from 2020. The number of observations (made weekly) is only 16 (by default, Prophet specifies 25 potential changepoints which are uniformly placed in the first 80% of the time series). This has resulted in an overfitted model and does not give reliable predictions. As the trend shown above, the number of claims continuously increase based on the COVID19 cases considered so far. The model without incorporating COVID cases estimated UI claims to be 15.8M during 2020, while the multivariate time series model estimates it to be 20M in June 2020. The actual UI claims till April 18, 2020, are 15M. If the COVID situation persists during coming months, the multivariate model tends to give more accurate results because it captures the impact due to the pandemic whereas it is not captured in the independent UI claims model.
+
+![](results/multivar_timeseries_ui_claims.png)
 
 ## Conclusion
 - Time series model for the COVID cases forecasted over 1.5 million cases at the end of May 2020 based on current trend. 
