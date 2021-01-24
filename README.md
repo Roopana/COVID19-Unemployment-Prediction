@@ -1,23 +1,14 @@
-# CovidAnalysis
-Covid19's economic impact analysis in Spark
+# Unemployment claims in US due to COVID-19 - Pedictive Analysis
 
-Objectives
+## Objectives
 
-Primary objectives of this analysis are:
-1.	To analyze, predict and visualize the distribution and number of cases of COVID19 across U.S states using Spark.
-2.	To validate the report released by the U.S department of labor on Unemployment Insurance (UI) claims in terms of the states which observed highest number of insurance claims since the pandemic has started, states with highest number of Insured Unemployment rate. 
-3.	To predict the trend in unemployment claims based on the COVID19 cases being reported. This is achieved using the timeseries analysis of U.S Unemployment insurance claims since 1987 till April 18th, 2020 and correlating the trend with COVID19 cases in U.S.
-Scope and audience of the analysis
+- 1. To analyze, predict and visualize the distribution and number of cases of COVID19 across U.S states using Spark.
+- 2. To predict the trend in unemployment claims based on the COVID19 cases being reported. This is achieved using the timeseries analysis of U.S Unemployment insurance claims since 1987 till April 18th, 2020 and correlating the trend with COVID19 cases in U.S.
 
-1.	The analysis provides an insight into the future trend of COVID cases. 
-a)	This can be an input to enforce/ relax the social distance measures. 
-b)	Predictions on the number of cases will help general public to build a perspective on when the pandemic would stabilize/end.
-2.	Analysis on the number of UI claims can be used as an economic indicator since employment is one of the key factors of macro-economic growth. 
-3.	During and post the 2008 recession, due to a surge in UI claims, policy makers had increased the number of weeks for which workers can receive benefits, increased the amount of benefits, and shifted more of the responsibility for funding UI programs to the federal government. The COVID19 pandemic also calls for major policy reforms (for example, 2trillion$ issued by government). This analysis quantitatively indicates the funds required and their allocation to the affected states proportional to the number of claims, insured unemployment rate and population of the state, which are captured in the model. 
-Datasets
-1.	COVID19 dataset published by Our World in Data for daily cases and deaths in U.S states (Jan 01, 2020 to May 6, 2020, updated daily).
-2.	Weekly unemployment insurance claims from Jan 1 1987 to Apr 18 2020, across all states in U.S, published by the U.S Department of Labor. This data is not seasonally adjusted and hence would be ideal to explore the data patterns.
-3.	Population data of all states in U.S (non-institutional civilian population) since 1967, as published by the U.S Bureau of Labor Statistics. This data is used to calculate COVD19 cases and UI claims as percentage of a state’s population and do a comparative analysis on the severity of situation across the states. The data set also contains information on employment, however only population data is used. 
+## Datasets
+1. [COVID19 dataset https://github.com/owid/covid-19-data/tree/master/public/data] published by _Our World_ in Data for daily cases and deaths in U.S states (Jan 01, 2020 to May 6, 2020, updated daily).
+2. Weekly unemployment insurance claims from Jan 1 1987 to Apr 18 2020, across all states in U.S, published by the U.S Department of Labor. This data is not seasonally adjusted and hence would be ideal to explore the data patterns.
+3. Population data of all states in U.S (non-institutional civilian population) since 1967, as published by the U.S Bureau of Labor Statistics. This data is used to calculate COVD19 cases and UI claims as percentage of a state’s population and do a comparative analysis on the severity of situation across the states. The data set also contains information on employment, however only population data is used. 
 
 Below is the list of key fields used from the data sets. Please refer Appendix A for the detailed description of fields.
 List of fields
