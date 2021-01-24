@@ -27,54 +27,17 @@ The analysis consists of three predictive models:
 - 3. A time series model to predict weekly unemployment insurance claims by considering the COVID cases as an additional regressor in the model built in #2.
 
 ## Results and Inference
-1.	Daily COVID cases aggregated over all states in US
 
- 
-	The graph shows the number of cases in U.S since Jan 2020, aggregated over all the states. Statistics on the number of cases are,
-COVID19 Cases so far: 1204205, Deaths so far: 65438
-COVID19 cases as % of population: 20.399 %, deaths as % of population: 1.017%
+### COVID19 cases - future predictions
+Below trend is obtained as a result of the time series prediction of COVID cases in 2020. The dark line denotes the historical data (till May 6, 2020) and predictions afterwards. Shaded area in the plot corresponds to error in the forecasted observations. Given the data available is small, error is high in the predictions. U.S has seen an exponential increase in the number of cases; hence the predictions indicate an exponential growth in the future cases. However, the shaded region indicates a possibility of stabilization which can be attribute to the recent observations. It is not depicted in the actual trend due to the insignificant number of observations. Hence, the model needs to be continuously updated with real time data for change in trends and accurate predictions. As per the trend the number of cases will be over 1.5 million at the end of May 2020. 
 
-2.	COVID cases since Jan 2020 (state wise trend)
- 
 
-State with maximum number of cases: New York, cases = 321276, deaths = 19645, cases as % of population=2.056, deaths as % of population=0.1256%
-State with minimum number of cases: Northern Mariana Islands, cases = 14, deaths = 2
-
-3.	Monthly Unemployment Insurance claims in US since 1987
-
- 
-	It can be observed that the UI claims have reached an all-time high in 2020 (~15 million), as a result of the lockdown and hence a sharp decline in economic activity. A local maximum can be seen in 2009 (5 million) as a result of 2008 recession. The current impact is almost three times the 2008 crisis. This scale gives an estimate of the reforms/funds required to repair the current situation in comparison with the 2008 crisis. 
-
-4.	Weekly UI claims since the onset of Pandemic (state wise trend)
-
+### Time series Predictions - UI claims
+Below is the time series prediction of UI claims till 2022. There are two points of inflection in the trend - 1987 and 2009 both corresponding to the two major economic crises in the past. The trendline for 2020 shows a slight increase in the number of UI claims which has remained constant since 2010 at 1.58 million. However, the error means that there can be an increase or decrease based on the future observations, potentially resulting in another inflection point in the UI claims trend indicating a major change. This depends on how long the pandemic lasts. Hence to get a better understanding, the model is trained using COVID cases as an input parameter and the results are described in the next graph. 
  
 
-Attribute	State	Value
-Highest UI claims	 California	3448295
-Least UI claims	 Virgin Islands	572
-Highest Insured Unemployment Rate	 Rhode Island	57.18
-Least Insured Unemployment Rate	 Florida	8.7
-
-	The graph shows the trends of UI claims in each state. It can be viewed that the surge started in the third week of March, reached maximum and the graph started decreasing mostly after first week of April. Few states like Florida see a rise after April 12, this can be attributed to the differences in infection trends in each state. The initial infected states, New Jersey, California, Seattle, seem to have settled down, however now other states have picked up the numbers. Insured Unemployment Rate attribute gives the number of unemployed who are insured. These variables and trends provide a direction to prioritize funds allocation to state by the US federal government. We can also predict trends of the later infected states (Ex: Florida, Georgia), based on the states that have already seen the peak (Ex: California)
-
-5.	COVID19 cases - future predictions
-	Below trend is obtained as a result of the time series prediction of COVID cases in 2020. The dark line denotes the historical data (till May 6, 2020) and predictions afterwards. Shaded area in the plot corresponds to error in the forecasted observations. Given the data available is small, error is high in the predictions. U.S has seen an exponential increase in the number of cases; hence the predictions indicate an exponential growth in the future cases. However, the shaded region indicates a possibility of stabilization which can be attribute to the recent observations. It is not depicted in the actual trend due to the insignificant number of observations. Hence, the model needs to be continuously updated with real time data for change in trends and accurate predictions. As per the trend the number of cases will be over 1.5 million at the end of May 2020. 
-
- 
-
-6.	Seasonality of the UI claims obtained from Time series analysis
-	In contrast with the COVID model, UI claims’ model has data available since 1987. Thus, seasonality of data can be captured comparatively better based on the past observations. Below graph shows monthly seasonality of UI claims. Maximum claims are seen in December which can be attributed to the termination of temporary job opportunities that arise during Christmas and Thanksgiving season. 
-
- 
-
-7.	Time series Predictions - UI claims
-	Below is the time series prediction of UI claims till 2022. There are two points of inflection in the trend - 1987 and 2009 both corresponding to the two major economic crises in the past. The trendline for 2020 shows a slight increase in the number of UI claims which has remained constant since 2010 at 1.58 million. However, the error means that there can be an increase or decrease based on the future observations, potentially resulting in another inflection point in the UI claims trend indicating a major change. This depends on how long the pandemic lasts. Hence to get a better understanding, the model is trained using COVID cases as an input parameter and the results are described in the next graph. 
- 
-
-8.	Multivariate Time series Model for UI claims	
- 
-
-	By adding COVID data as an additional regressor, the resultant UI claims data is now restricted only to the data from 2020. The number of observations (made weekly) is only 16 (by default, Prophet specifies 25 potential changepoints which are uniformly placed in the first 80% of the time series). This has resulted in an overfitted model and does not give reliable predictions. As the trend shown above, the number of claims continuously increase based on the COVID19 cases considered so far. The model without incorporating COVID cases estimated UI claims to be 15.8M during 2020, while the multivariate time series model estimates it to be 20M in June 2020. The actual UI claims till April 18, 2020, are 15M. If the COVID situation persists during coming months, the multivariate model tends to give more accurate results because it captures the impact due to the pandemic whereas it is not captured in the independent UI claims model.
+### Multivariate Time series Model for UI claims	
+By adding COVID data as an additional regressor, the resultant UI claims data is now restricted only to the data from 2020. The number of observations (made weekly) is only 16 (by default, Prophet specifies 25 potential changepoints which are uniformly placed in the first 80% of the time series). This has resulted in an overfitted model and does not give reliable predictions. As the trend shown above, the number of claims continuously increase based on the COVID19 cases considered so far. The model without incorporating COVID cases estimated UI claims to be 15.8M during 2020, while the multivariate time series model estimates it to be 20M in June 2020. The actual UI claims till April 18, 2020, are 15M. If the COVID situation persists during coming months, the multivariate model tends to give more accurate results because it captures the impact due to the pandemic whereas it is not captured in the independent UI claims model.
 
 ## Conclusion
 Time series model for the COVID cases forecasted over 1.5 million cases at the end of May 2020 based on current trend. 
@@ -83,11 +46,11 @@ Time series model for the COVID cases forecasted over 1.5 million cases at the e
 	When we compare the current unemployment situation with that of the 2008 recession, it is much worse given the UI claims are three times as seen in 2008. This calls for potentially much worse decline in GDP than what was seen in 2008. However, this needs to be backed up by the analysis of other economic indicators like trade, transportation, consumer prices, fuel prices etc.
 
 ## Learnings
-1. Data cleaning, validation and modelling in Spark using Python
-2. Time series Analysis using prophet library and multi variate analysis. Prophet is based on an additive model considering non-periodic changes and periodic components in a Bayesian framework with easily interpretable parameters. 	
-3. Query optimization using partitioned DELTA tables
-4. User defined functions to perform data preprocessing operations
-5. Databricks as an interactive interface for quick plotting and import of other libraries. 
+- Data cleaning, validation and modelling in Spark using Python
+- Time series Analysis using prophet library and multi variate analysis. Prophet is based on an additive model considering non-periodic changes and periodic components in a Bayesian framework with easily interpretable parameters. 	
+- Query optimization using partitioned DELTA tables
+- User defined functions to perform data preprocessing operations
+- Databricks as an interactive interface for quick plotting and import of other libraries. 
 
 ## Challenges
 
