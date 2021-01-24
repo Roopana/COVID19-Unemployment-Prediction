@@ -8,7 +8,7 @@
 ## Datasets
 1. [COVID19 dataset](https://github.com/owid/covid-19-data/tree/master/public/data) published by _Our World_ in Data for daily cases and deaths in U.S states (Jan 01, 2020 to May 6, 2020, updated daily).
 2. [Weekly unemployment insurance claims](https://oui.doleta.gov/unemploy/claims.asp) from Jan 1 1987 to Apr 18 2020, across all states in U.S, published by the U.S Department of Labor. This data is not seasonally adjusted and hence would be ideal to explore the data patterns.
-3. Population data of all states in U.S (non-institutional civilian population) since 1967, as published by the U.S Bureau of Labor Statistics. This data is used to calculate COVD19 cases and UI claims as percentage of a state’s population and do a comparative analysis on the severity of situation across the states. The data set also contains information on employment, however only population data is used. 
+3. [Population data](https://www.bls.gov/sae/additional-resources/list-of-published-state-and-metropolitan-area-series/home.htm) of all states in U.S (non-institutional civilian population) since 1967, as published by the U.S Bureau of Labor Statistics. This data is used to calculate COVD19 cases and UI claims as percentage of a state’s population and do a comparative analysis on the severity of situation across the states. The data set also contains information on employment, however only population data is used. 
 
 ## Data Preprocessing
 - 1. The population data is only available till March 2020, values for the months of April and May are imputed by assuming there is no change in population since March 2020. 
@@ -25,7 +25,8 @@ The analysis consists of three predictive models:
 - 1. A time series model to predict COVID cases across all states, based on the affected population since Jan 2020. It is built using the open source library – prophet, by facebook.
 - 2. A time series model to predict weekly unemployment insurance claims independent of the pandemic, based on historical data, since 1987. 
 - 3. A time series model to predict weekly unemployment insurance claims by considering the COVID cases as an additional regressor in the model built in #2.
-Results and Inference
+
+## Results and Inference
 1.	Daily COVID cases aggregated over all states in US
 
  
